@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeFit - Features</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Features page specific styles */
+    .features-hero {
+      background: linear-gradient(135deg, #ff9a8b 0%, #ff6b6b 50%, #ff4b4b 100%);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .features-hero h1 {
+      font-family: 'Press Start 2P', cursive;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 0 #333;
+      animation: textPulse 2s infinite alternate;
+    }
+    
+    @keyframes textPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+    
+    .feature-detail {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .feature-detail.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .feature-detail:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .feature-image {
+      flex: 1;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .feature-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .feature-image .pokemon-icon {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      animation: float 3s infinite ease-in-out;
+    }
+    
+    .feature-content {
+      flex: 1;
+      padding: 20px;
+    }
+    
+    .feature-content h2 {
+      color: #e60000;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .feature-content p {
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .feature-content ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .feature-content li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .feature-content li:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background-image: url('poke-ball.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    
+    .try-feature-btn {
+      background: #3b4cca;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .try-feature-btn:hover {
+      background: #2a3bbf;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(59, 76, 202, 0.4);
+    }
+    
+    .try-feature-btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .try-feature-btn:hover:before {
+      left: 100%;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .pokemon-types {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 50px 0;
+    }
+    
+    .type-badge {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .type-badge:hover {
+      transform: scale(1.1);
+    }
+    
+    .type-badge img {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .fire { background: #F08030; }
+    .water { background: #6890F0; }
+    .grass { background: #78C850; }
+    .electric { background: #F8D030; }
+    .psychic { background: #F85888; }
+    .fighting { background: #C03028; }
+    .normal { background: #A8A878; }
+    .flying { background: #A890F0; }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #3b4cca 0%, #2a3bbf 100%);
+      padding: 60px 20px;
+      text-align: center;
+      color: white;
+    }
+    
+    .cta-section h2 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .type-badge.active-badge {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.type-badge.active-badge:after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="./images/poke-ball.png" alt="Pokeball" />
+        <span>PokeFit</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html" class="active">Features</a></li>
+        <li><a href="trainer.html">Trainers</a></li>
+        <li><a href="#">Workouts</a></li>
+        <li><a href="#">Achievements</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <section class="features-hero">
+    <h1>POKÉFIT FEATURES</h1>
+    <p>Discover how PokeFit transforms your fitness journey with Pokémon-inspired workouts and challenges</p>
+    
+    <div class="pokemon-types">
+      <div class="type-badge fire">
+        <img src="./images/fire-icon.jpg" alt="Fire">
+        Fire
+      </div>
+      <div class="type-badge water">
+        <img src="./images/water-icon.png" alt="Water">
+        Water
+      </div>
+      <div class="type-badge grass">
+        <img src="./images/grass-icon.png" alt="Grass">
+        Grass
+      </div>
+      <div class="type-badge electric">
+        <img src="./images/electric-icon.jpg" alt="Electric">
+        Electric
+      </div>
+      <div class="type-badge psychic">
+        <img src="./images/psychic-icon.png" alt="Psychic">
+        Psychic
+      </div>
+      <div class="type-badge fighting">
+        <img src="./images/fighting-icon.png" alt="Fighting">
+        Fighting
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Feature 1 -->
+    <div class="feature-detail" data-type="Fire">
+      <div class="feature-image">
+        <img src="./images/workout-feature.jpg" alt="Pokémon Workouts">
+        <img src="./images/charmander.png" class="pokemon-icon" style="top: -20px; right: 20px;">
+      </div>
+      <div class="feature-content">
+        <h2>POKÉMON WORKOUTS</h2>
+        <p>Train like your favorite Pokémon with specially designed workouts that match their types and abilities. Each workout is crafted to target specific muscle groups while making fitness fun.</p>
+        <ul>
+          <li>Flamethrower Push-ups (Fire Type)</li>
+          <li>Hydro Pump Squats (Water Type)</li>
+          <li>Vine Whip Stretches (Grass Type)</li>
+          <li>Thunder Shock HIIT (Electric Type)</li>
+        </ul>
+        <button class="try-feature-btn">Try a Workout</button>
+      </div>
+    </div>
+    
+    <!-- Feature 2 -->
+    <div class="feature-detail" data-type="Water">
+      <div class="feature-image">
+        <img src="./images/badges-feature.jpg" alt="Gym Badges">
+        <img src="./images/squirtle.png" class="pokemon-icon" style="bottom: -10px; left: 30px;">
+      </div>
+      <div class="feature-content">
+        <h2>GYM BADGES</h2>
+        <p>Earn badges as you complete workouts and reach fitness milestones. Just like in the Pokémon games, these badges represent your growth and achievements on your fitness journey.</p>
+        <ul>
+          <li>Boulder Badge: Complete 10 strength workouts</li>
+          <li>Cascade Badge: Finish 15 water-based exercises</li>
+          <li>Thunder Badge: Achieve 20 high-intensity workouts</li>
+          <li>Rainbow Badge: Complete workouts from all types</li>
+        </ul>
+        <button class="try-feature-btn">View Badges</button>
+      </div>
+    </div>
+    
+    <!-- Feature 3 -->
+    <div class="feature-detail" data-type="Electric">
+      <div class="feature-image">
+        <img src="./images/community-feature.jpg" alt="Community">
+        <img src="./images/pikachu.png" class="pokemon-icon" style="top: 20px; left: 20px;">
+      </div>
+      <div class="feature-content">
+        <h2>EVOLVE TOGETHER</h2>
+        <p>Connect with friends and other trainers to compete, support each other, and grow stronger together. Our community features make fitness a social and engaging experience.</p>
+        <ul>
+          <li>Friend challenges and competitions</li>
+          <li>Team workouts for group fitness</li>
+          <li>Leaderboards to track progress</li>
+          <li>Share achievements on social media</li>
+        </ul>
+        <button class="try-feature-btn">Join Community</button>
+      </div>
+    </div>
+    
+    <!-- Feature 4 -->
+    <div class="feature-detail" data-type="Grass">
+      <div class="feature-image">
+        <img src="./images/progress-feature.jpg" alt="Progress Tracking">
+        <img src="./images/bulbasaur.png" class="pokemon-icon" style="bottom: 10px; right: 10px;">
+      </div>
+      <div class="feature-content">
+        <h2>TRAINER PROGRESS</h2>
+        <p>Track your fitness journey with detailed statistics and visualizations. Watch as your trainer level increases with each completed workout, just like Pokémon gaining experience.</p>
+        <ul>
+          <li>Experience points (XP) for workouts</li>
+          <li>Level up system with rewards</li>
+          <li>Detailed workout history</li>
+          <li>Body metrics tracking</li>
+        </ul>
+        <button class="try-feature-btn">Check Progress</button>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+  <section class="cta-section">
+    <h2>READY TO START YOUR JOURNEY?</h2>
+    <p>Join thousands of trainers who are already transforming their fitness routines with PokeFit. Sign up today and receive a special starter pack with exclusive workouts!</p>
+    <button class="get-started">Become a Trainer</button>
+  </section>
+
+
+  <script>
+    // Animation for feature details on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const featureDetails = document.querySelectorAll('.feature-detail');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+      
+      featureDetails.forEach(detail => {
+        observer.observe(detail);
+      });
+      
+      // Type badge click animation
+      const typeBadges = document.querySelectorAll('.type-badge');
+      
+      // Show all features initially
+      function showAllFeatures() {
+        featureDetails.forEach(detail => {
+          detail.style.display = 'flex';
+          // Re-trigger the animation
+          detail.classList.remove('visible');
+          setTimeout(() => {
+            detail.classList.add('visible');
+          }, 10);
+        });
+      }
+      
+      // Add "All Types" badge
+      const typesContainer = document.querySelector('.pokemon-types');
+      const allTypesBadge = document.createElement('div');
+      allTypesBadge.className = 'type-badge normal';
+      allTypesBadge.innerHTML = '<img src="./images/normal-icon.png" alt="All">All Types';
+      typesContainer.prepend(allTypesBadge);
+      
+      // Set active state for badges
+      function setActiveBadge(activeBadge) {
+        typeBadges.forEach(badge => {
+          badge.classList.remove('active-badge');
+        });
+        activeBadge.classList.add('active-badge');
+      }
+      
+      // Set All Types as active by default
+      allTypesBadge.classList.add('active-badge');
+      
+      // Filter features by type
+      function filterFeaturesByType(type) {
+        featureDetails.forEach(detail => {
+          const featureType = detail.getAttribute('data-type');
+          
+          if (type === 'All Types' || featureType === type) {
+            detail.style.display = 'flex';
+            // Re-trigger the animation
+            detail.classList.remove('visible');
+            setTimeout(() => {
+              detail.classList.add('visible');
+            }, 10);
+          } else {
+            detail.style.display = 'none';
+          }
+        });
+      }
+      
+      // Add click event for All Types badge
+      allTypesBadge.addEventListener('click', function() {
+        this.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 300);
+        
+        setActiveBadge(this);
+        showAllFeatures();
+      });
+      
+      
+      typeBadges.forEach(badge => {
+        badge.addEventListener('click', function() {
+          this.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 300);
+          
+          const type = this.textContent.trim();
+          console.log(`${type} type selected`);
+          
+          setActiveBadge(this);
+          filterFeaturesByType(type);
+        });
+      });
+    });
+   
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeFit - Achievements</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="achievements.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="poke-ball.png" alt="Pokeball" />
+        <span>PokeFit</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="trainer.html">Trainers</a></li>
+        <li><a href="workout.html">Workouts</a></li>
+        <li><a href="achievements.html" class="active">Achievements</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+      <button class="login-btn" onclick="location.href='login.html'">Login</button>
+    </nav>
+  </header>
+
+  <section class="achievements-hero">
+    <h1>YOUR POKÉFIT ACHIEVEMENTS</h1>
+    <p>Track your progress, earn badges, and complete special challenges as you evolve into a fitness master!</p>
+    
+    <div class="achievement-stats">
+      <div class="stat-card">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Badges Earned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">28</div>
+        <div class="stat-label">Workouts Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">5</div>
+        <div class="stat-label">Milestones Reached</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="achievements-tabs">
+      <button class="tab-btn active" data-tab="badges">Gym Badges</button>
+      <button class="tab-btn" data-tab="milestones">Milestones</button>
+      <button class="tab-btn" data-tab="special">Special Challenges</button>
+    </div>
+    
+    <!-- Badges Tab -->
+    <div class="tab-content active" id="badges-tab">
+      <h2 class="section-title">GYM BADGES</h2>
+      <p class="section-description">Collect badges by completing specific workout types and challenges</p>
+      
+      <div class="badges-grid">
+        <!-- Badge 1 -->
+        <div class="badge-card earned">
+          <div class="badge-icon">
+            <img src="./images/boulder-badge.png" alt="Boulder Badge">
+          </div>
+          <h3>Boulder Badge</h3>
+          <p>Complete 10 strength workouts</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="badge-date">Earned on: May 15, 2023</div>
+          </div>
+        </div>
+        
+        <!-- Badge 2 -->
+        <div class="badge-card earned">
+          <div class="badge-icon">
+            <img src="./images/cascade-badge.png" alt="Cascade Badge">
+          </div>
+          <h3>Cascade Badge</h3>
+          <p>Complete 15 water-based exercises</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <div class="badge-date">Earned on: June 2, 2023</div>
+          </div>
+        </div>
+        
+        <!-- Badge 3 -->
+        <div class="badge-card">
+          <div class="badge-icon">
+            <img src="./images/thunder-badge.png" alt="Thunder Badge">
+          </div>
+          <h3>Thunder Badge</h3>
+          <p>Complete 20 high-intensity workouts</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <div class="badge-date">Progress: 15/20</div>
+          </div>
+        </div>
+        
+        <!-- Badge 4 -->
+        <div class="badge-card">
+          <div class="badge-icon">
+            <img src="./images/rainbow-badge.png" alt="Rainbow Badge">
+          </div>
+          <h3>Rainbow Badge</h3>
+          <p>Complete workouts from all types</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 50%"></div>
+            </div>
+            <div class="badge-date">Progress: 4/8 types</div>
+          </div>
+        </div>
+        
+        <!-- Badge 5 -->
+        <div class="badge-card locked">
+          <div class="badge-icon">
+            <img src="./images/soul-badge.png" alt="Soul Badge">
+          </div>
+          <h3>Soul Badge</h3>
+          <p>Complete 30 flexibility workouts</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 20%"></div>
+            </div>
+            <div class="badge-date">Progress: 6/30</div>
+          </div>
+        </div>
+        
+        <!-- Badge 6 -->
+        <div class="badge-card locked">
+          <div class="badge-icon">
+            <img src="./images/marsh-badge.png" alt="Marsh Badge">
+          </div>
+          <h3>Marsh Badge</h3>
+          <p>Complete 25 meditation sessions</p>
+          <div class="badge-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 10%"></div>
+            </div>
+            <div class="badge-date">Progress: 3/25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Milestones Tab -->
+    <div class="tab-content" id="milestones-tab">
+      <h2 class="section-title">FITNESS MILESTONES</h2>
+      <p class="section-description">Track your progress through these important fitness milestones</p>
+      
+      <div class="milestones-list">
+        <!-- Milestone 1 -->
+        <div class="milestone-card completed">
+          <div class="milestone-icon">
+            <img src="./images/pikachu.png" alt="First Workout">
+          </div>
+          <div class="milestone-info">
+            <h3>First Workout Completed</h3>
+            <p>You completed your first PokeFit workout</p>
+            <div class="milestone-date">Completed on: May 10, 2023</div>
+          </div>
+          <div class="milestone-reward">+100 XP</div>
+        </div>
+        
+        <!-- Milestone 2 -->
+        <div class="milestone-card completed">
+          <div class="milestone-icon">
+            <img src="./images/charmander.png" alt="Workout Streak">
+          </div>
+          <div class="milestone-info">
+            <h3>7-Day Streak</h3>
+            <p>You completed workouts for 7 consecutive days</p>
+            <div class="milestone-date">Completed on: May 17, 2023</div>
+          </div>
+          <div class="milestone-reward">+250 XP</div>
+        </div>
+        
+        <!-- Milestone 3 -->
+        <div class="milestone-card in-progress">
+          <div class="milestone-icon">
+            <img src="./images/squirtle.png" alt="Water Workouts">
+          </div>
+          <div class="milestone-info">
+            <h3>Water Type Master</h3>
+            <p>Complete 20 water-based workouts</p>
+            <div class="milestone-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+              <div class="badge-date">Progress: 15/20</div>
+            </div>
+          </div>
+          <div class="milestone-reward">+300 XP</div>
+        </div>
+        
+        <!-- Milestone 4 -->
+        <div class="milestone-card locked">
+          <div class="milestone-icon">
+            <img src="./images/bulbasaur.png" alt="Consistency">
+          </div>
+          <div class="milestone-info">
+            <h3>30-Day Consistency</h3>
+            <p>Complete at least 20 workouts in 30 days</p>
+            <div class="milestone-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+              </div>
+              <div class="badge-date">Progress: 8/20</div>
+            </div>
+          </div>
+          <div class="milestone-reward">+500 XP</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Special Challenges Tab -->
+    <div class="tab-content" id="special-tab">
+      <h2 class="section-title">SPECIAL CHALLENGES</h2>
+      <p class="section-description">Take on these limited-time challenges to earn exclusive rewards</p>
+      
+      <div class="special-achievements">
+        <!-- Special Challenge 1 -->
+        <div class="special-card">
+          <div class="special-icon">
+            <img src="./images/charizard.png" alt="Fire Challenge">
+          </div>
+          <h3>FIRE TYPE CHALLENGE</h3>
+          <p>Complete 5 fire-type workouts in 7 days to earn the Flame Badge and exclusive Charizard trainer outfit.</p>
+          <button class="challenge-btn">Start Challenge</button>
+        </div>
+        
+        <!-- Special Challenge 2 -->
+        <div class="special-card">
+          <div class="special-icon">
+            <img src="./images/mewtwo.png" alt="Elite Challenge">
+          </div>
+          <h3>ELITE FOUR CHALLENGE</h3>
+          <p>Complete 4 advanced workouts from different types in 4 days to earn the Champion Badge and 1000 XP.</p>
+          <button class="challenge-btn">Start Challenge</button>
+        </div>
+        
+        <!-- Special Challenge 3 -->
+        <div class="special-card">
+          <div class="special-icon">
+            <img src="./images/snorlax.png" alt="Rest Challenge">
+          </div>
+          <h3>REST & RECOVERY</h3>
+          <p>Complete 3 meditation sessions and track 8 hours of sleep for 5 days to earn the Relaxation Badge.</p>
+          <button class="challenge-btn">Start Challenge</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <section class="level-up-section">
+    <h2>CURRENT TRAINER LEVEL: 15</h2>
+    <p>Keep working out to gain XP and level up your trainer. Each level unlocks new workouts and rewards!</p>
+    
+    <div class="level-progress">
+      <div class="level-indicator">Level 15 → Level 16</div>
+      <div class="xp-bar">
+        <div class="xp-fill" style="width: 75%"></div>
+      </div>
+      <div class="xp-text">3750 / 5000 XP</div>
+    </div>
+    
+    <button class="workout-btn" onclick="location.href='workout.html'">Find a Workout</button>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons and contents
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Show corresponding content
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+      });
+      
+      // Challenge button functionality
+      const challengeButtons = document.querySelectorAll('.challenge-btn');
+      
+      challengeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const challengeName = this.parentElement.querySelector('h3').textContent;
+          alert(`You've started the ${challengeName}! Check back daily to track your progress.`);
+          this.textContent = 'In Progress';
+          this.disabled = true;
+          this.style.background = '#999';
+        });
+      });
+      
+      // Simulate badge unlock (for demo purposes)
+      setTimeout(() => {
+        const lockedBadge = document.querySelector('.badge-card:not(.earned):not(.locked)');
+        if (lockedBadge) {
+          lockedBadge.classList.add('just-earned');
+          setTimeout(() => {
+            lockedBadge.classList.add('earned');
+          }, 800);
+        }
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

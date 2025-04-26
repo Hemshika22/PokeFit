@@ -1,0 +1,467 @@
+/* Login Page Styles */
+body {
+  background: linear-gradient(135deg, #3b4cca 0%, #2a3bbf 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.login-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  margin: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-card {
+  background: white;
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-decoration {
+  width: 40%;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.login-header .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.login-header .logo span {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: #e60000;
+}
+
+.login-header h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.login-tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px;
+  background: none;
+  border: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-btn:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #e60000;
+  transition: width 0.3s ease;
+}
+
+.tab-btn.active {
+  color: #e60000;
+}
+
+.tab-btn.active:after {
+  width: 100%;
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #3b4cca;
+  outline: none;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.forgot-password a {
+  color: #3b4cca;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.remember-me input {
+  margin-right: 10px;
+}
+
+.login-submit-btn,
+.register-submit-btn {
+  background: #e60000;
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 8px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.login-submit-btn:hover,
+.register-submit-btn:hover {
+  background: #cc0000;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(230, 0, 0, 0.3);
+}
+
+.login-submit-btn:before,
+.register-submit-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.login-submit-btn:hover:before,
+.register-submit-btn:hover:before {
+  left: 100%;
+}
+
+.social-login {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.social-login p {
+  color: #999;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.social-login p:before,
+.social-login p:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.social-login p:before {
+  left: 0;
+}
+
+.social-login p:after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.social-btn.google:hover {
+  border-color: #DB4437;
+}
+
+.social-btn.facebook:hover {
+  border-color: #4267B2;
+}
+
+.login-footer {
+  margin-top: auto;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.back-home {
+  color: #3b4cca;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.back-home:hover {
+  color: #e60000;
+}
+
+/* Starter Pokémon Selection */
+.starter-selection {
+  margin-top: 20px;
+}
+
+.starter-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.starter-option {
+  flex: 1;
+  text-align: center;
+}
+
+.starter-option input[type="radio"] {
+  display: none;
+}
+
+.starter-option label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.starter-option input[type="radio"]:checked + label {
+  border-color: #3b4cca;
+  background: rgba(59, 76, 202, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(59, 76, 202, 0.2);
+}
+
+.starter-option label img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.starter-option label:hover img {
+  transform: scale(1.1);
+}
+
+.starter-option label span {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Terms checkbox */
+.terms {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.terms input {
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.terms label {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.terms a {
+  color: #3b4cca;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Pokémon decorations */
+.login-pokemon {
+  position: absolute;
+  animation: float 4s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.pikachu {
+  width: 120px;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.charizard {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.squirtle {
+  width: 80px;
+  bottom: 10%;
+  right: 10%;
+  z-index: 2;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column;
+  }
+  
+  .login-card {
+    width: 100%;
+    order: 2;
+  }
+  
+  .login-decoration {
+    width: 100%;
+    height: 200px;
+    order: 1;
+  }
+  
+  .pikachu {
+    width: 100px;
+  }
+  
+  .squirtle {
+    width: 70px;
+    bottom: 5%;
+    right: 5%;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    padding: 20px;
+  }
+  
+  .login-header h1 {
+    font-size: 1rem;
+  }
+  
+  .tab-btn {
+    font-size: 0.7rem;
+    padding: 10px;
+  }
+  
+  .starter-options {
+    flex-direction: column;
+  }
+  
+  .starter-option {
+    margin-bottom: 10px;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+  }
+}

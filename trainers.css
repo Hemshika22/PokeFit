@@ -1,0 +1,152 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #fff, #f0f8ff);
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background-color: white;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e60000;
+  }
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+  }
+  .nav-links a.active {
+    color: #e60000;
+  }
+  .login-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #3f51b5;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .trainers-section {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .trainers-heading {
+    font-size: 2.2rem;
+    font-family: 'Pokemon Solid', cursive;
+    color: #ffd700;
+    text-shadow: 2px 2px #3b4cca;
+    margin-bottom: 20px;
+  }
+  
+  .trainer-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  
+  .trainer-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 250px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .trainer-card:hover {
+    transform: scale(1.05);
+  }
+  .trainer-card img {
+    height: 100px;
+  }
+  .level-info {
+    margin: 10px 0;
+  }
+  .xp-bar {
+    background: #ddd;
+    border-radius: 5px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .xp-fill {
+    background-color: #3b82f6;
+    height: 100%;
+  }
+  .train-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #e60000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* Modal Styling */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .workout-item {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-left: 5px solid #3b4cca;
+    border-radius: 6px;
+  }
+  .workout-item h5 {
+    margin: 0 0 5px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: #ffc107;
+    color: #222;
+    margin-left: 10px;
+  }
+  .tag.hard {
+    background: #e53935;
+    color: white;
+  }

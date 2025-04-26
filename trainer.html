@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PokeFit Trainers</title>
+  <link rel="stylesheet" href="trainers.css"/>
+</head>
+<body>
+
+  <section class="trainers-section">
+    <h1 class="trainers-heading">YOUR POKÉMON TRAINERS</h1>
+    <p>Select your Pokémon to view stats and start workout sessions.</p>
+
+    <div class="trainer-cards">
+      <!-- Trainer Card -->
+      <div class="trainer-card" onclick="openModal()">
+        <img src="./images/charizard-left.jpg" alt="Charizard">
+        <h3>Charizard</h3>
+        <p>Fire/Flying</p>
+        <div class="level-info">
+          <span>Level 32</span>
+          <div class="xp-bar"><div class="xp-fill" style="width: 60%;"></div></div>
+          <span>120/200 XP</span>
+        </div>
+        <button class="train-btn">Train Charizard</button>
+      </div>
+
+      <div class="trainer-card">
+        <img src="./images/blastoise.png" alt="Blastoise">
+        <h3>Blastoise</h3>
+        <p>Water</p>
+        <div class="level-info">
+          <span>Level 28</span>
+          <div class="xp-bar"><div class="xp-fill" style="width: 50%;"></div></div>
+          <span>90/180 XP</span>
+        </div>
+        <button class="train-btn">Train Blastoise</button>
+      </div>
+
+      <div class="trainer-card">
+        <img src="./images/venusaur.png" alt="Venusaur">
+        <h3>Venusaur</h3>
+        <p>Grass/Poison</p>
+        <div class="level-info">
+          <span>Level 30</span>
+          <div class="xp-bar"><div class="xp-fill" style="width: 58%;"></div></div>
+          <span>110/190 XP</span>
+        </div>
+        <button class="train-btn">Train Venusaur</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workout Modal -->
+  <div class="modal" id="workoutModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Training Charizard</h2>
+      <div class="level-info">
+        <p><strong>Level 32</strong></p>
+        <div class="xp-bar"><div class="xp-fill" style="width: 60%;"></div></div>
+        <p>120/200 XP</p>
+      </div>
+      <p class="flavor-text">Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything...</p>
+
+      <h4>Available Workouts:</h4>
+      <div class="workout-list">
+        <div class="workout-item">
+          <h5>🔥 Flamethrower Push-ups <span class="tag medium">medium</span></h5>
+          <p>3 sets of 12 reps – +50 XP</p>
+        </div>
+        <div class="workout-item">
+          <h5>💦 Hydro Pump Squats <span class="tag medium">medium</span></h5>
+          <p>4 sets of 15 reps – +25 XP</p>
+        </div>
+        <div class="workout-item">
+          <h5>🌿 Solar Beam Planks <span class="tag hard">hard</span></h5>
+          <p>5 sets of 45 seconds – +35 XP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("workoutModal").style.display = "block";
+    }
+    function closeModal() {
+      document.getElementById("workoutModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == document.getElementById("workoutModal")) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>

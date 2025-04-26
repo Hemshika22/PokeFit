@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeFit - Pokémon Workouts</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Workout page specific styles */
+    .workout-hero {
+      background: linear-gradient(135deg, #3b4cca 0%, #2a3bbf 100%);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .workout-hero h1 {
+      font-family: 'Press Start 2P', cursive;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 0 #333;
+      animation: textPulse 2s infinite alternate;
+    }
+    
+    @keyframes textPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+    
+    .workout-hero p {
+      color: white;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .filter-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 1000px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .filter-title {
+      font-family: 'Press Start 2P', cursive;
+      color: #e60000;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .filter-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover {
+      background: #e0e0e0;
+    }
+    
+    .filter-btn.active {
+      background: #3b4cca;
+      color: white;
+    }
+    
+    .difficulty-filter {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .difficulty-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .difficulty-btn:hover {
+      background: #e0e0e0;
+    }
+    
+    .difficulty-btn.active {
+      background: #e60000;
+      color: white;
+    }
+    
+    .difficulty-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .workouts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .workout-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 0.5s forwards;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .workout-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .workout-image {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 3px solid #3b4cca;
+    }
+    
+    .workout-type {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      border-radius: 15px;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .workout-info {
+      padding: 20px;
+      position: relative;
+    }
+    
+    .workout-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .workout-description {
+      color: #666;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .workout-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.8rem;
+    }
+    
+    .workout-difficulty {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .difficulty-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+    
+    .difficulty-dot.active {
+      background: #e60000;
+    }
+    
+    .workout-duration {
+      color: #666;
+    }
+    
+    .workout-pokemon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      bottom: -20px;
+      right: -10px;
+      transform: rotate(10deg);
+      transition: transform 0.3s ease;
+    }
+    
+    .workout-card:hover .workout-pokemon {
+      transform: rotate(0) scale(1.2);
+    }
+    
+    .start-workout-btn {
+      width: 100%;
+      padding: 12px;
+      background: #3b4cca;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .start-workout-btn:hover {
+      background: #2a3bbf;
+    }
+    
+    .start-workout-btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .start-workout-btn:hover:before {
+      left: 100%;
+    }
+    
+    .workout-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .workout-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 15px;
+      padding: 30px;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    
+    .workout-modal.active .modal-content {
+      transform: scale(1);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #e60000;
+    }
+    
+    .modal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .modal-pokemon {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+      animation: bounce 2s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    
+    .modal-title {
+      font-family: 'Press Start 2P', cursive;
+      color: #3b4cca;
+      font-size: 1.5rem;
+    }
+    
+    .exercise-list {
+      margin-top: 20px;
+    }
+    
+    .exercise-item {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .exercise-number {
+      background: #3b4cca;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    
+    .exercise-details {
+      flex: 1;
+    }
+    
+    .exercise-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .exercise-description {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .exercise-reps {
+      background: #e60000;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+    
+    .start-session-btn {
+      background: #e60000;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      display: block;
+      width: 100%;
+    }
+    
+    .start-session-btn:hover {
+      background: #cc0000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 50px;
+      color: #666;
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+    }
+    
+    .fire { background: #F08030; }
+    .water { background: #6890F0; }
+    .grass { background: #78C850; }
+    .electric { background: #F8D030; }
+    .psychic { background: #F85888; }
+    .fighting { background: #C03028; }
+    .normal { background: #A8A878; }
+    .flying { background: #A890F0; }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .workouts-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .filter-options {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .difficulty-filter {
+        flex-wrap: wrap;
+      }
+      
+      .workout-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="poke-ball.png" alt="Pokeball" />
+        <span>PokeFit</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="trainer.html">Trainers</a></li>
+        <li><a href="workout.html" class="active">Workouts</a></li>
+        <li><a href="#">Achievements</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+      <button class="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <section class="workout-hero">
+    <h1>POKÉMON WORKOUTS</h1>
+    <p>Choose from our collection of Pokémon-inspired workouts designed to help you train like a true Pokémon master. Filter by type, difficulty, or duration to find the perfect workout for your fitness journey.</p>
+  </section>
+
+  <div class="filter-container">
+    <h3 class="filter-title">FILTER WORKOUTS</h3>
+    
+    <div class="filter-options">
+      <button class="filter-btn active" data-filter="all">All Types</button>
+      <button class="filter-btn fire" data-filter="fire">Fire</button>
+      <button class="filter-btn water" data-filter="water">Water</button>
+      <button class="filter-btn grass" data-filter="grass">Grass</button>
+      <button class="filter-btn electric" data-filter="electric">Electric</button>
+      <button class="filter-btn psychic" data-filter="psychic">Psychic</button>
+      <button class="filter-btn fighting" data-filter="fighting">Fighting</button>
+    </div>
+    
+    <div class="difficulty-filter">
+      <button class="difficulty-btn active" data-difficulty="all">
+        <img src="./images/pokeball-icon.png" class="difficulty-icon" alt="All">
+        All Difficulties
+      </button>
+      <button class="difficulty-btn" data-difficulty="beginner">
+        <img src="./images/pokeball-icon.png" class="difficulty-icon" alt="Beginner">
+        Beginner
+      </button>
+      <button class="difficulty-btn" data-difficulty="intermediate">
+        <img src="./images/greatball-icon.png" class="difficulty-icon" alt="Intermediate">
+        Intermediate
+      </button>
+      <button class="difficulty-btn" data-difficulty="advanced">
+        <img src="./images/ultraball-icon.png" class="difficulty-icon" alt="Advanced">
+        Advanced
+      </button>
+    </div>
+  </div>
+
+  <div class="workouts-container" id="workouts-container">
+    <!-- Workout cards will be generated here -->
+  </div>
+
+  <!-- Workout Detail Modal -->
+  <div class="workout-modal" id="workout-modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-modal">×</button>
+      <div class="modal-header">
+        <img src="" alt="" class="modal-pokemon" id="modal-pokemon">
+        <h2 class="modal-title" id="modal-title"></h2>
+      </div>
+      <div class="modal-body">
+        <div class="workout-meta">
+          <div class="workout-difficulty" id="modal-difficulty"></div>
+          <div class="workout-duration" id="modal-duration"></div>
+        </div>
+        <p id="modal-description"></p>
+        <div class="exercise-list" id="exercise-list">
+          <!-- Exercise items will be generated here -->
+        </div>
+        <button class="start-session-btn">START WORKOUT SESSION</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Workout data
+      const workouts = [
+        {
+          id: 1,
+          title: "Flamethrower Push-ups",
+          type: "fire",
+          difficulty: "intermediate",
+          duration: "25 min",
+          description: "Ignite your upper body strength with this fire-type workout inspired by Charizard's powerful flames.",
+          image: "./images/fire-workout.jpg",
+          pokemon: "./images/charmander.png",
+          exercises: [
+            {
+              name: "Fire Punch Push-ups",
+              description: "Standard push-ups with explosive movement at the top",
+              reps: "3 sets x 12 reps"
+            },
+            {
+              name: "Ember Plank Jacks",
+              description: "Plank position with alternating jumping jacks motion",
+              reps: "3 sets x 45 seconds"
+            },
+            {
+              name: "Charizard Wing Raises",
+              description: "Lying face down, raise arms out to sides like wings",
+              reps: "3 sets x 15 reps"
+            },
+            {
+              name: "Blaze Burpees",
+              description: "Full burpees with a jump and arm raise at the top",
+              reps: "3 sets x 10 reps"
+            },
+            {
+              name: "Heat Wave Stretches",
+              description: "Dynamic stretching routine to cool down",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "Hydro Pump Squats",
+          type: "water",
+          difficulty: "beginner",
+          duration: "20 min",
+          description: "Build lower body strength and endurance with this water-type workout inspired by Squirtle's powerful water attacks.",
+          image: "./images/water-workout.jpg",
+          pokemon: "./images/squirtle.png",
+          exercises: [
+            {
+              name: "Water Gun Squats",
+              description: "Basic squats with arms extended forward",
+              reps: "3 sets x 15 reps"
+            },
+            {
+              name: "Bubble Beam Lunges",
+              description: "Walking lunges with rotation",
+              reps: "3 sets x 10 reps each leg"
+            },
+            {
+              name: "Aqua Tail Kicks",
+              description: "Standing leg raises to the side",
+              reps: "3 sets x 12 reps each leg"
+            },
+            {
+              name: "Surf Swimmers",
+              description: "Lying on stomach, arm and leg raises",
+              reps: "3 sets x 45 seconds"
+            },
+            {
+              name: "Whirlpool Cool Down",
+              description: "Circular stretching motions for recovery",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: "Solar Beam Core",
+          type: "grass",
+          difficulty: "intermediate",
+          duration: "30 min",
+          description: "Strengthen your core with this grass-type workout inspired by Bulbasaur's energy-gathering abilities.",
+          image: "./images/grass-workout.jpg",
+          pokemon: "./images/bulbasaur.png",
+          exercises: [
+            {
+              name: "Vine Whip Crunches",
+              description: "Crunches with arms extended overhead",
+              reps: "3 sets x 20 reps"
+            },
+            {
+              name: "Seed Bomb Russian Twists",
+              description: "Seated twists with weight if available",
+              reps: "3 sets x 16 reps"
+            },
+            {
+              name: "Leaf Storm Planks",
+              description: "Plank with alternating leg lifts",
+              reps: "3 sets x 60 seconds"
+            },
+            {
+              name: "Petal Dance Bicycles",
+              description: "Bicycle crunches with full extension",
+              reps: "3 sets x 20 reps"
+            },
+            {
+              name: "Synthesis Stretching",
+              description: "Yoga-inspired stretches for recovery",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: "Thunder Shock HIIT",
+          type: "electric",
+          difficulty: "advanced",
+          duration: "35 min",
+          description: "Boost your cardio with this high-intensity electric-type workout inspired by Pikachu's lightning-fast movements.",
+          image: "./images/electric-workout.jpg",
+          pokemon: "./images/pikachu.png",
+          exercises: [
+            {
+              name: "Quick Attack Sprints",
+              description: "Short distance sprints with full recovery",
+              reps: "5 sets x 30 seconds"
+            },
+            {
+              name: "Thunderbolt Jumps",
+              description: "Squat jumps with arms reaching upward",
+              reps: "4 sets x 15 reps"
+            },
+            {
+              name: "Volt Tackle Mountain Climbers",
+              description: "Fast-paced mountain climbers",
+              reps: "4 sets x 45 seconds"
+            },
+            {
+              name: "Electro Ball Slams",
+              description: "Medicine ball slams or simulated motion",
+              reps: "3 sets x 12 reps"
+            },
+            {
+              name: "Static Stretch",
+              description: "Full body static stretching routine",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 5,
+          title: "Psychic Mind-Body Flow",
+          type: "psychic",
+          difficulty: "beginner",
+          duration: "40 min",
+          description: "Connect mind and body with this psychic-type workout inspired by Mewtwo's mental prowess and flexibility.",
+          image: "./images/psychic-workout.jpg",
+          pokemon: "./images/mewtwo.png",
+          exercises: [
+            {
+              name: "Confusion Balances",
+              description: "Single leg balance poses with arm movements",
+              reps: "3 sets x 30 seconds each side"
+            },
+            {
+              name: "Psybeam Flows",
+              description: "Flowing movement between warrior poses",
+              reps: "4 sets x 8 reps"
+            },
+            {
+              name: "Future Sight Planks",
+              description: "Plank holds with mindful breathing",
+              reps: "3 sets x 45 seconds"
+            },
+            {
+              name: "Telekinesis Reaches",
+              description: "Standing side bends with extended reach",
+              reps: "3 sets x 10 reps each side"
+            },
+            {
+              name: "Meditation Cool Down",
+              description: "Guided meditation for recovery",
+              reps: "10 min"
+            }
+          ]
+        },
+        {
+          id: 6,
+          title: "Fighting Dojo Training",
+          type: "fighting",
+          difficulty: "advanced",
+          duration: "45 min",
+          description: "Master martial arts movements with this fighting-type workout inspired by Machamp's powerful techniques.",
+          image: "./images/fighting-workout.jpg",
+          pokemon: "./images/machamp.png",
+          exercises: [
+            {
+              name: "Karate Chop Punches",
+              description: "Alternating punches with proper form",
+              reps: "4 sets x 20 reps"
+            },
+            {
+              name: "Low Kick Sweeps",
+              description: "Low squat with leg sweep motion",
+              reps: "3 sets x 12 reps each side"
+            },
+            {
+              name: "Seismic Toss Burpees",
+              description: "Burpees with overhead clap at top",
+              reps: "4 sets x 10 reps"
+            },
+            {
+              name: "Dynamic Punch Combos",
+              description: "Combination of punches and defensive moves",
+              reps: "3 sets x 45 seconds"
+            },
+            {
+              name: "Submission Hold Stretches",
+              description: "Partner or solo stretching routine",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 7,
+          title: "Normal-Type Fitness Basics",
+          type: "normal",
+          difficulty: "beginner",
+          duration: "25 min",
+          description: "Master the fundamentals with this normal-type workout inspired by Eevee's adaptable nature.",
+          image: "./images/normal-workout.jpg",
+          pokemon: "./images/eevee.png",
+          exercises: [
+            {
+              name: "Tackle Jumping Jacks",
+              description: "Standard jumping jacks with good form",
+              reps: "3 sets x 30 seconds"
+            },
+            {
+              name: "Swift Arm Circles",
+              description: "Forward and backward arm circles",
+              reps: "2 sets x 20 reps each direction"
+            },
+            {
+              name: "Quick Attack Marches",
+              description: "High knee marches in place",
+              reps: "3 sets x 45 seconds"
+            },
+            {
+              name: "Growl Squats",
+              description: "Basic squats with proper breathing",
+              reps: "3 sets x 12 reps"
+            },
+            {
+              name: "Rest Recovery",
+              description: "Basic stretching routine",
+              reps: "5 min"
+            }
+          ]
+        },
+        {
+          id: 8,
+          title: "Flying-Type Cardio",
+          type: "flying",
+          difficulty: "intermediate",
+          duration: "30 min",
+          description: "Soar to new heights with this flying-type cardio workout inspired by Pidgeot's aerial maneuvers.",
+          image: "./images/flying-workout.jpg",
+          pokemon: "./images/pidgeot.png",
+          exercises: [
+            {
+              name: "Wing Attack Arm Flys",
+              description: "Standing or lying arm fly movements",
+              reps: "3 sets x 15 reps"
+            },
+            {
+              name: "Aerial Ace Jumps",
+              description: "Jumping with arms in wing position",
+              reps: "4 sets x 20 seconds"
+            },
+            {
+              name: "Gust Windmills",
+              description: "Standing windmill touches to feet",
+              reps: "3 sets x 12 reps each side"
+            },
+            {
+              name: "Sky Drop Burpees",
+              description: "Modified burpees with jump",
+              reps: "3 sets x 8 reps"
+            },
+            {
+              name: "Roost Stretches",
+              description: "Recovery stretches focusing on shoulders",
+              reps: "5 min"
+            }
+          ]
+        }
+      ];
+
+      const workoutsContainer = document.getElementById('workouts-container');
+      const modal = document.getElementById('workout-modal');
+      const closeModal = document.getElementById('close-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalPokemon = document.getElementById('modal-pokemon');
+      const modalDifficulty = document.getElementById('modal-difficulty');
+      const modalDuration = document.getElementById('modal-duration');
+      const modalDescription = document.getElementById('modal-description');
+      const exerciseList = document.getElementById('exercise-list');
+      
+      // Filter buttons
+      const typeFilters = document.querySelectorAll('.filter-btn');
+      const difficultyFilters = document.querySelectorAll('.difficulty-btn');
+      
+      let activeTypeFilter = 'all';
+      let activeDifficultyFilter = 'all';
+      
+      // Generate workout cards
+      function generateWorkoutCards() {
+        workoutsContainer.innerHTML = '';
+        
+        let filteredWorkouts = workouts.filter(workout => {
+          const typeMatch = activeTypeFilter === 'all' || workout.type === activeTypeFilter;
+          const difficultyMatch = activeDifficultyFilter === 'all' || workout.difficulty === activeDifficultyFilter;
+          return typeMatch && difficultyMatch;
+        });
+        
+        if (filteredWorkouts.length === 0) {
+          workoutsContainer.innerHTML = `
+            <div class="no-results">
+              <h3>No workouts found</h3>
+              <p>Try changing your filters to see more workouts</p>
+            </div>
+          `;
+          return;
+        }
+        
+        filteredWorkouts.forEach((workout, index) => {
+          const card = document.createElement('div');
+          card.className = 'workout-card';
+          card.style.animationDelay = `${index * 0.1}s`;
+          
+          // Create difficulty dots
+          let difficultyDots = '';
+          if (workout.difficulty === 'beginner') {
+            difficultyDots = `
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            `;
+          } else if (workout.difficulty === 'intermediate') {
+            difficultyDots = `
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+            `;
+          } else if (workout.difficulty === 'advanced') {
+            difficultyDots = `
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+            `;
+          }
+          
+          card.innerHTML = `
+            <div style="position: relative;">
+              <img src="${workout.image}" alt="${workout.title}" class="workout-image">
+              <div class="workout-type ${workout.type}">${workout.type}</div>
+            </div>
+            <div class="workout-info">
+              <h3 class="workout-title">${workout.title}</h3>
+              <p class="workout-description">${workout.description}</p>
+              <div class="workout-meta">
+                <div class="workout-difficulty">
+                  ${difficultyDots}
+                </div>
+                <div class="workout-duration">${workout.duration}</div>
+              </div>
+              <button class="start-workout-btn" data-workout-id="${workout.id}">Start Workout</button>
+              <img src="${workout.pokemon}" alt="Pokemon" class="workout-pokemon">
+            </div>
+          `;
+          container.appendChild(card);
+        });
+        
+        // Add event listeners to the newly created buttons
+        document.querySelectorAll('.start-workout-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const workoutId = parseInt(this.getAttribute('data-workout-id'));
+            openWorkoutModal(workoutId);
+          });
+        });
+      }
+      
+      // Function to filter workouts
+      function filterWorkouts() {
+        const typeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        const difficultyFilter = document.querySelector('.difficulty-btn.active').getAttribute('data-difficulty');
+        
+        let filtered = [...workouts];
+        
+        // Apply type filter
+        if (typeFilter !== 'all') {
+          filtered = filtered.filter(workout => workout.type === typeFilter);
+        }
+        
+        // Apply difficulty filter
+        if (difficultyFilter !== 'all') {
+          filtered = filtered.filter(workout => workout.difficulty === difficultyFilter);
+        }
+        
+        renderWorkouts(filtered);
+      }
+      
+      // Function to open workout modal
+      function openWorkoutModal(workoutId) {
+        const workout = workouts.find(w => w.id === workoutId);
+        if (!workout) return;
+        
+        const modal = document.getElementById('workout-modal');
+        const modalPokemon = document.getElementById('modal-pokemon');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDifficulty = document.getElementById('modal-difficulty');
+        const modalDuration = document.getElementById('modal-duration');
+        const modalDescription = document.getElementById('modal-description');
+        const exerciseList = document.getElementById('exercise-list');
+        
+        // Set modal content
+        modalPokemon.src = workout.pokemon;
+        modalPokemon.alt = workout.title;
+        modalTitle.textContent = workout.title;
+        
+        // Create difficulty dots
+        let difficultyDotsHtml = '';
+        const totalDots = 3;
+        let activeDots = 0;
+        
+        if (workout.difficulty === 'beginner') {
+          activeDots = 1;
+          modalDifficulty.textContent = 'Beginner';
+        } else if (workout.difficulty === 'intermediate') {
+          activeDots = 2;
+          modalDifficulty.textContent = 'Intermediate';
+        } else if (workout.difficulty === 'advanced') {
+          activeDots = 3;
+          modalDifficulty.textContent = 'Advanced';
+        }
+        
+        for (let i = 0; i < totalDots; i++) {
+          difficultyDotsHtml += `<div class="difficulty-dot ${i < activeDots ? 'active' : ''}"></div>`;
+        }
+        
+        modalDifficulty.innerHTML = difficultyDotsHtml + ' ' + workout.difficulty.charAt(0).toUpperCase() + workout.difficulty.slice(1);
+        modalDuration.textContent = workout.duration;
+        modalDescription.textContent = workout.description;
+        
+        // Create exercise list
+        exerciseList.innerHTML = '';
+        workout.exercises.forEach((exercise, index) => {
+          const exerciseItem = document.createElement('div');
+          exerciseItem.className = 'exercise-item';
+          exerciseItem.innerHTML = `
+            <div class="exercise-number">${index + 1}</div>
+            <div class="exercise-details">
+              <div class="exercise-name">${exercise.name}</div>
+              <div class="exercise-description">${exercise.description}</div>
+            </div>
+            <div class="exercise-reps">${exercise.reps}</div>
+          `;
+          exerciseList.appendChild(exerciseItem);
+        });
+        
+        // Show modal with animation
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+      
+      // Function to close workout modal
+      function closeWorkoutModal() {
+        const modal = document.getElementById('workout-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Re-enable scrolling
+      }
+      
+      // Add event listeners for filter buttons
+      document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          filterWorkouts();
+        });
+      });
+      
+      // Add event listeners for difficulty buttons
+      document.querySelectorAll('.difficulty-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          filterWorkouts();
+        });
+      });
+      
+      // Add event listener for close modal button
+      document.getElementById('close-modal').addEventListener('click', closeWorkoutModal);
+      
+      // Close modal when clicking outside content
+      document.getElementById('workout-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeWorkoutModal();
+        }
+      });
+      
+      // Add event listener for start session button
+      document.querySelector('.start-session-btn').addEventListener('click', function() {
+        alert('Workout session started! This would navigate to the workout timer in a real app.');
+        closeWorkoutModal();
+      });
+      
+      // Initialize the page
+      renderWorkouts(workouts);
+    });

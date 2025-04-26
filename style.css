@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #ffffff, #e6f0ff);
+    overflow-x: hidden;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e60000;
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover {
+    color: #e60000;
+  }
+  
+  .login-btn {
+    background-color: #3f51b5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    background-color: #283593;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+  }
+  
+  .hero-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #ffcc00;
+    text-shadow: 2px 2px 0 #3b4cca;
+    animation: floatText 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes floatText {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+  
+  .hero p {
+    max-width: 700px;
+    margin: 20px auto;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .get-started {
+    background-color: #e60000;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .get-started:hover {
+    transform: scale(1.1);
+  }
+  
+  .bg-left, .bg-right {
+    position: absolute;
+    top: 100px;
+    width: 150px;
+    opacity: 0.2;
+  }
+  
+  .bg-left {
+    left: 0;
+  }
+  
+  .bg-right {
+    right: 0;
+  }
+  
+  .float-pokemon {
+    position: absolute;
+    bottom: 50px;
+    width: 120px;
+    animation: floatPokemon 2.5s infinite ease-in-out alternate;
+  }
+  
+  @keyframes floatPokemon {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+  }
+  
+
+  .features-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+  }
+  
+  .features-title {
+    font-family: 'Pokemon Solid', sans-serif; /* Or similar font */
+    color: #FFD700;
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+  
+  .feature-cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .feature-card {
+    background: #fff4f4;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .feature-card img {
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .feature-card p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .feature-card img {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
